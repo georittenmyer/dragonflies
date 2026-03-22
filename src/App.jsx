@@ -16,48 +16,34 @@ const GAMES = [
 ];
 
 const INITIAL_PLAYERS = [
-  { id: 1, name: "Geo", role: "player" },
+  { id: 1, name: "Geo", role: "coach" },
   { id: 2, name: "Greg", role: "coach" },
-  { id: 3, name: "Ian M", role: "player" },
-  { id: 4, name: "Oscar P", role: "player" },
-  { id: 5, name: "Luke G", role: "player" },
-  { id: 6, name: "Theo M", role: "player" },
-  { id: 7, name: "Emmett J", role: "player" },
-  { id: 8, name: "Emmett H", role: "player" },
-  { id: 9, name: "Aariv V", role: "player" },
-  { id: 10, name: "Ryatt R", role: "player" },
-  { id: 11, name: "Xavier E", role: "player" },
+  { id: 15, name: "Cedar B", role: "player" },
   { id: 12, name: "Nathaniel D", role: "player" },
   { id: 13, name: "Zachary D", role: "player" },
+  { id: 16, name: "Niko P", role: "player" },
+  { id: 5, name: "Luke G", role: "player" },
+  { id: 8, name: "Emmett H", role: "player" },
+  { id: 7, name: "Emmett J", role: "player" },
   { id: 14, name: "Paxton M", role: "player" },
-  { id: 15, name: "Cedar B", role: "player" },
-];
-
-const SNACK_SCHEDULE = [
-  { gameId: 1, who: "Aariv" },
-  { gameId: 2, who: "Emmett H." },
-  { gameId: 3, who: "Emmett J." },
-  { gameId: 4, who: "Zachary/Nathaniel" },
-  { gameId: 5, who: "Luke" },
-  { gameId: 6, who: "Cedar" },
-  { gameId: 7, who: "Xavier" },
-  { gameId: 8, who: "Oscar" },
-  { gameId: 9, who: "Theo" },
+  { id: 4, name: "Oscar P", role: "player" },
+  { id: 10, name: "Ryatt R", role: "player" },
+  { id: 17, name: "Jonah T", role: "player" },
+  { id: 9, name: "Aari V", role: "player" },
 ];
 
 const INITIAL_AVAILABILITY = {
   "1-1": "available", "1-2": "available", "1-3": "available", "1-4": "available", "1-5": "available", "1-6": "available",
   "2-1": "available", "2-2": "available", "2-3": "available", "2-4": "available", "2-5": "available", "2-6": "available", "2-7": "available", "2-8": "available", "2-9": "available",
-  "6-1": "available", "6-2": "available", "6-3": "available", "6-4": "available", "6-5": "unavailable", "6-6": "available", "6-7": "available", "6-8": "unavailable", "6-9": "available",
   "7-1": "available", "7-2": "available", "7-3": "available", "7-4": "available", "7-5": "available", "7-6": "available", "7-7": "available", "7-8": "available", "7-9": "available",
   "8-2": "available", "8-3": "available", "8-4": "available", "8-5": "available", "8-6": "available", "8-7": "available", "8-8": "available", "8-9": "available",
   "9-1": "available", "9-2": "available", "9-3": "available", "9-4": "available", "9-5": "available", "9-6": "available", "9-7": "available", "9-8": "available", "9-9": "available",
-  "11-1": "unavailable", "11-2": "unavailable", "11-3": "available", "11-4": "available", "11-5": "unavailable", "11-6": "available", "11-7": "available", "11-8": "available", "11-9": "unavailable",
   "12-1": "available", "12-2": "available", "12-3": "available", "12-4": "available", "12-5": "available", "12-6": "available", "12-7": "available", "12-8": "available", "12-9": "available",
   "15-1": "available", "15-2": "unavailable", "15-3": "available", "15-4": "available", "15-5": "available", "15-6": "available", "15-7": "available", "15-8": "available", "15-9": "available",
 };
 
 const STORAGE_KEY = "dragonflies-availability-v1";
+const SNACKS_KEY = "dragonflies-snacks-v1";
 
 function loadAvailability() {
   try {
@@ -71,6 +57,21 @@ function loadAvailability() {
 function saveAvailability(data) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  } catch {}
+}
+
+function loadSnacks() {
+  try {
+    const saved = localStorage.getItem(SNACKS_KEY);
+    return saved ? JSON.parse(saved) : {};
+  } catch {
+    return {};
+  }
+}
+
+function saveSnacks(data) {
+  try {
+    localStorage.setItem(SNACKS_KEY, JSON.stringify(data));
   } catch {}
 }
 
@@ -179,12 +180,12 @@ function PlayerSelector({ players, selectedId, onSelect }) {
 
 export default function App() {
   const [availability, setAvailability] = useState(loadAvailability);
+  const [snacks, setSnacks] = useState(loadSnacks);
   const [currentPlayer, setCurrentPlayer] = useState(null);
   const [view, setView] = useState("schedule");
 
-  useEffect(() => {
-    saveAvailability(availability);
-  }, [availability]);
+  useEffect(() => { saveAvailability(availability); }, [availability]);
+  useEffect(() => { saveSnacks(snacks); }, [snacks]);
 
   const setStatus = (playerId, gameId, status) => {
     setAvailability(prev => ({ ...prev, [`${playerId}-${gameId}`]: status }));
@@ -203,7 +204,7 @@ export default function App() {
     return { available, unavailable, undecided };
   };
 
-  const snackFor = (gameId) => SNACK_SCHEDULE.find(s => s.gameId === gameId)?.who;
+  const setSnack = (gameId, name) => setSnacks(prev => ({ ...prev, [gameId]: name }));
 
   return (
     <div style={{ fontFamily: "var(--font-sans)", maxWidth: "100%" }}>
@@ -231,7 +232,7 @@ export default function App() {
 
       {/* Tab bar */}
       <div style={{ display: "flex", gap: "2px", marginBottom: "20px", background: "var(--color-background-secondary)", borderRadius: "var(--border-radius-md)", padding: "3px" }}>
-        {[{ id: "schedule", label: "Schedule" }, { id: "roster", label: "Roster" }, { id: "snacks", label: "Snacks" }].map(tab => (
+        {[{ id: "schedule", label: "Schedule" }, { id: "roster", label: "Roster" }].map(tab => (
           <button key={tab.id} onClick={() => setView(tab.id)} style={{
             flex: 1, padding: "8px 12px", border: "none", borderRadius: "6px",
             fontSize: "13px", fontWeight: 500, cursor: "pointer", fontFamily: "var(--font-sans)",
@@ -277,11 +278,24 @@ export default function App() {
                   </div>
                 </div>
 
-                {snackFor(game.id) && (
-                  <div style={{ marginTop: "8px", fontSize: "12px", color: "var(--color-text-secondary)", display: "flex", alignItems: "center", gap: "4px" }}>
-                    🍊 Snack: {snackFor(game.id)}
-                  </div>
-                )}
+                <div style={{ marginTop: "8px", display: "flex", alignItems: "center", gap: "6px" }}>
+                  <span style={{ fontSize: "12px", color: "var(--color-text-secondary)" }}>🍊 Snack:</span>
+                  <select
+                    value={snacks[game.id] || ""}
+                    onChange={e => setSnack(game.id, e.target.value)}
+                    style={{
+                      fontSize: "12px", color: snacks[game.id] ? "var(--color-text-primary)" : "var(--color-text-secondary)",
+                      background: "transparent", border: "0.5px solid var(--color-border-tertiary)",
+                      borderRadius: "6px", padding: "2px 6px", cursor: "pointer",
+                      fontFamily: "var(--font-sans)",
+                    }}
+                  >
+                    <option value="">— pick someone —</option>
+                    {INITIAL_PLAYERS.filter(p => p.role === "player").map(p => (
+                      <option key={p.id} value={p.name}>{p.name}</option>
+                    ))}
+                  </select>
+                </div>
 
                 {currentPlayer && (
                   <div style={{
@@ -368,43 +382,6 @@ export default function App() {
         </div>
       )}
 
-      {/* Snack schedule view */}
-      {view === "snacks" && (
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
-          <div style={{
-            padding: "12px 14px", background: "#fef3c7", borderRadius: "var(--border-radius-md)",
-            fontSize: "13px", color: "#92400e", border: "1px solid #fde68a",
-          }}>
-            ⚠️ Please no peanuts — Theo is allergic
-          </div>
-          {SNACK_SCHEDULE.map(snack => {
-            const game = GAMES.find(g => g.id === snack.gameId);
-            return (
-              <div key={snack.gameId} style={{
-                display: "flex", justifyContent: "space-between", alignItems: "center",
-                padding: "12px 14px", background: "var(--color-background-primary)",
-                border: "0.5px solid var(--color-border-tertiary)", borderRadius: "var(--border-radius-md)",
-              }}>
-                <div>
-                  <span style={{ fontSize: "14px", fontWeight: 500, color: "var(--color-text-primary)" }}>
-                    {game.day}, {game.date}
-                  </span>
-                  <span style={{ fontSize: "13px", color: "var(--color-text-secondary)", marginLeft: "8px" }}>
-                    {game.time} @ {game.location}
-                  </span>
-                </div>
-                <span style={{
-                  fontSize: "14px", fontWeight: 500, color: "var(--color-text-primary)",
-                  background: "var(--color-background-secondary)", padding: "4px 12px",
-                  borderRadius: "var(--border-radius-md)",
-                }}>
-                  {snack.who}
-                </span>
-              </div>
-            );
-          })}
-        </div>
-      )}
     </div>
   );
 }
