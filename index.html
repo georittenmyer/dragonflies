@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Dragonflies — Fall 2025</title>
+        <title>Dragonflies — Spring 2026</title>
         <link
             rel="icon"
             href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='%2310b981'/><text x='16' y='22' text-anchor='middle' font-size='18'>⚽</text></svg>"
@@ -277,6 +277,35 @@
                 border-radius: var(--r-md);
             }
 
+            .ha-badge {
+                display: inline-flex;
+                padding: 2px 8px;
+                border-radius: 999px;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+                line-height: 1;
+            }
+            .ha-home {
+                background: #dbeafe;
+                color: #1e40af;
+            }
+            .ha-away {
+                background: #fae8ff;
+                color: #86198f;
+            }
+            .opponent {
+                font-size: 14px;
+                font-weight: 500;
+                color: var(--t1);
+                margin-top: 4px;
+            }
+            .game-num {
+                font-size: 11px;
+                color: var(--t3);
+            }
+
             /* Player selector */
             .selector {
                 position: relative;
@@ -379,7 +408,7 @@
             .roster-header,
             .roster-row {
                 display: grid;
-                grid-template-columns: 140px repeat(9, 1fr);
+                grid-template-columns: 140px repeat(8, 1fr);
                 padding: 6px 0;
                 align-items: center;
                 text-align: center;
@@ -437,66 +466,83 @@
             const GAMES = [
                 {
                     id: 1,
-                    date: "Sep 7",
+                    date: "Mar 29",
                     day: "Sun",
-                    time: "1:45 PM",
-                    location: "Jefferson",
+                    time: "3:00 PM",
+                    location: "Ridgecrest School - W",
+                    ha: "away",
+                    opponent: "SL Fireballs",
+                    gameNum: "1002",
                 },
                 {
                     id: 2,
-                    date: "Sep 14",
+                    date: "Apr 12",
                     day: "Sun",
-                    time: "11:15 AM",
-                    location: "Interbay",
+                    time: "2:00 PM",
+                    location: "Van Asselt - N",
+                    ha: "away",
+                    opponent: "RVSC Seattle Stormtroopers",
+                    gameNum: "1011",
                 },
                 {
                     id: 3,
-                    date: "Sep 28",
+                    date: "Apr 19",
                     day: "Sun",
-                    time: "12:15 PM",
-                    location: "Green Lake",
+                    time: "1:00 PM",
+                    location: "Ridgecrest School - W",
+                    ha: "away",
+                    opponent: "HW Soccer Tigers",
+                    gameNum: "1020",
                 },
                 {
                     id: 4,
-                    date: "Oct 5",
+                    date: "Apr 26",
                     day: "Sun",
-                    time: "8:45 AM",
-                    location: "James Baldwin",
+                    time: "3:00 PM",
+                    location: "Ridgecrest School - W",
+                    ha: "home",
+                    opponent: "WD Shark Waves",
+                    gameNum: "1031",
                 },
                 {
                     id: 5,
-                    date: "Oct 12",
+                    date: "May 3",
                     day: "Sun",
-                    time: "12:15 PM",
-                    location: "Magnolia North",
+                    time: "3:00 PM",
+                    location: "Ridgecrest School - W",
+                    ha: "home",
+                    opponent: "WD Dragons",
+                    gameNum: "1042",
                 },
                 {
                     id: 6,
-                    date: "Oct 19",
+                    date: "May 10",
                     day: "Sun",
-                    time: "10:45 AM",
-                    location: "Magnolia North",
+                    time: "1:00 PM",
+                    location: "Ridgecrest School - E",
+                    ha: "home",
+                    opponent: "Mag Red Dragons",
+                    gameNum: "1053",
                 },
                 {
                     id: 7,
-                    date: "Oct 26",
+                    date: "May 17",
                     day: "Sun",
-                    time: "12:45 PM",
-                    location: "Interbay",
+                    time: "3:00 PM",
+                    location: "Ridgecrest School - E",
+                    ha: "away",
+                    opponent: "HW Mystic Jellybeans",
+                    gameNum: "1063",
                 },
                 {
                     id: 8,
-                    date: "Nov 2",
+                    date: "May 31",
                     day: "Sun",
-                    time: "10:45 AM",
-                    location: "Parkwood",
-                },
-                {
-                    id: 9,
-                    date: "Nov 9",
-                    day: "Sun",
-                    time: "8:45 AM",
-                    location: "James Baldwin",
+                    time: "2:00 PM",
+                    location: "Ridgecrest School - W",
+                    ha: "away",
+                    opponent: "HW Mystic Jellybeans",
+                    gameNum: null,
                 },
             ];
 
@@ -519,98 +565,19 @@
             ];
 
             const SNACKS = [
-                { gameId: 1, who: "Aariv" },
-                { gameId: 2, who: "Emmett H." },
-                { gameId: 3, who: "Emmett J." },
-                { gameId: 4, who: "Zachary/Nathaniel" },
-                { gameId: 5, who: "Luke" },
-                { gameId: 6, who: "Cedar" },
-                { gameId: 7, who: "Xavier" },
-                { gameId: 8, who: "Oscar" },
-                { gameId: 9, who: "Theo" },
+                { gameId: 1, who: "TBD" },
+                { gameId: 2, who: "TBD" },
+                { gameId: 3, who: "TBD" },
+                { gameId: 4, who: "TBD" },
+                { gameId: 5, who: "TBD" },
+                { gameId: 6, who: "TBD" },
+                { gameId: 7, who: "TBD" },
+                { gameId: 8, who: "TBD" },
             ];
 
-            const INIT_AVAIL = {
-                "1-1": "available",
-                "1-2": "available",
-                "1-3": "available",
-                "1-4": "available",
-                "1-5": "available",
-                "1-6": "available",
-                "2-1": "available",
-                "2-2": "available",
-                "2-3": "available",
-                "2-4": "available",
-                "2-5": "available",
-                "2-6": "available",
-                "2-7": "available",
-                "2-8": "available",
-                "2-9": "available",
-                "6-1": "available",
-                "6-2": "available",
-                "6-3": "available",
-                "6-4": "available",
-                "6-5": "unavailable",
-                "6-6": "available",
-                "6-7": "available",
-                "6-8": "unavailable",
-                "6-9": "available",
-                "7-1": "available",
-                "7-2": "available",
-                "7-3": "available",
-                "7-4": "available",
-                "7-5": "available",
-                "7-6": "available",
-                "7-7": "available",
-                "7-8": "available",
-                "7-9": "available",
-                "8-2": "available",
-                "8-3": "available",
-                "8-4": "available",
-                "8-5": "available",
-                "8-6": "available",
-                "8-7": "available",
-                "8-8": "available",
-                "8-9": "available",
-                "9-1": "available",
-                "9-2": "available",
-                "9-3": "available",
-                "9-4": "available",
-                "9-5": "available",
-                "9-6": "available",
-                "9-7": "available",
-                "9-8": "available",
-                "9-9": "available",
-                "11-1": "unavailable",
-                "11-2": "unavailable",
-                "11-3": "available",
-                "11-4": "available",
-                "11-5": "unavailable",
-                "11-6": "available",
-                "11-7": "available",
-                "11-8": "available",
-                "11-9": "unavailable",
-                "12-1": "available",
-                "12-2": "available",
-                "12-3": "available",
-                "12-4": "available",
-                "12-5": "available",
-                "12-6": "available",
-                "12-7": "available",
-                "12-8": "available",
-                "12-9": "available",
-                "15-1": "available",
-                "15-2": "unavailable",
-                "15-3": "available",
-                "15-4": "available",
-                "15-5": "available",
-                "15-6": "available",
-                "15-7": "available",
-                "15-8": "available",
-                "15-9": "available",
-            };
+            const INIT_AVAIL = {};
 
-            const KEY = "dragonflies-avail-v1";
+            const KEY = "dragonflies-avail-spring2026-v1";
             function load() {
                 try {
                     const s = localStorage.getItem(KEY);
@@ -868,7 +835,7 @@
                                 e(
                                     "p",
                                     { className: "season" },
-                                    "Fall 2025 schedule",
+                                    "Spring 2026 schedule",
                                 ),
                             ),
                         ),
@@ -922,8 +889,9 @@
                                                 {
                                                     style: {
                                                         display: "flex",
-                                                        alignItems: "baseline",
+                                                        alignItems: "center",
                                                         gap: "8px",
+                                                        flexWrap: "wrap",
                                                     },
                                                 },
                                                 e(
@@ -936,12 +904,53 @@
                                                     { className: "game-time" },
                                                     g.time,
                                                 ),
+                                                e(
+                                                    "span",
+                                                    {
+                                                        className:
+                                                            "ha-badge " +
+                                                            (g.ha === "home"
+                                                                ? "ha-home"
+                                                                : "ha-away"),
+                                                    },
+                                                    g.ha,
+                                                ),
                                             ),
                                             e(
                                                 "div",
-                                                { className: "game-location" },
-                                                e(PinSvg),
-                                                g.location,
+                                                { className: "opponent" },
+                                                (g.ha === "home"
+                                                    ? "vs. "
+                                                    : "at ") + g.opponent,
+                                            ),
+                                            e(
+                                                "div",
+                                                {
+                                                    style: {
+                                                        display: "flex",
+                                                        alignItems: "center",
+                                                        gap: "8px",
+                                                        marginTop: "2px",
+                                                    },
+                                                },
+                                                e(
+                                                    "span",
+                                                    {
+                                                        className:
+                                                            "game-location",
+                                                    },
+                                                    e(PinSvg),
+                                                    g.location,
+                                                ),
+                                                g.gameNum &&
+                                                    e(
+                                                        "span",
+                                                        {
+                                                            className:
+                                                                "game-num",
+                                                        },
+                                                        "Game #" + g.gameNum,
+                                                    ),
                                             ),
                                         ),
                                         e(
