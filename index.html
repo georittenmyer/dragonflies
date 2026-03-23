@@ -130,6 +130,8 @@
 </head>
 <body>
 <div id="root"></div>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script>
 const TEAM_NAME = "Dragonflies";
 const SEASON = "Spring 2026";
@@ -162,41 +164,55 @@ const PLAYERS = [
     { id: 9,  name: "Aari V",      role: "player" },
 ];
 
-const INITIAL_AVAILABILITY = {};
+// ── Firebase config — REPLACE WITH YOUR CONFIG ─────────────────────────────
+const firebaseConfig = {
+    apiKey:            "AIzaSyDqBbkPaO1JNwdgGGYEtPJKlh23olnbs7Y",
+    authDomain:        "dragonflies-4ee1b.firebaseapp.com",
+    projectId:         "dragonflies-4ee1b",
+    storageBucket:     "dragonflies-4ee1b.firebasestorage.app",
+    messagingSenderId: "1059964216686",
+    appId:             "1:1059964216686:web:6ec3b8eb8100604f2ecd7f"
+};
+// ───────────────────────────────────────────────────────────────────────────
 
-const AVAIL_KEY  = "dragonflies-availability-v2";
-const SNACKS_KEY = "dragonflies-snacks-v2";
-
-function load(key, fallback) {
-    try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; }
-}
-function save(key, data) {
-    try { localStorage.setItem(key, JSON.stringify(data)); } catch {}
-}
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const SEASON_DOC = "spring2026";
 
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
-    availability: load(AVAIL_KEY, { ...INITIAL_AVAILABILITY }),
-    snacks:       load(SNACKS_KEY, {}),
+    availability:  {},
+    snacks:        {},
     currentPlayer: null,
-    view: "schedule",
-    dropdownOpen: false,
+    view:          "schedule",
+    dropdownOpen:  false,
+    loaded:        false,
 };
+
+// Real-time listeners — any change by anyone on any device updates everyone
+db.collection(SEASON_DOC).doc("availability").onSnapshot(doc => {
+    state.availability = doc.exists ? doc.data() : {};
+    state.loaded = true;
+    render();
+});
+
+db.collection(SEASON_DOC).doc("snacks").onSnapshot(doc => {
+    state.snacks = doc.exists ? doc.data() : {};
+    render();
+});
 
 function getStatus(playerId, gameId) {
     return state.availability[`${playerId}-${gameId}`] || "undecided";
 }
 
 function setStatus(playerId, gameId, status) {
-    state.availability[`${playerId}-${gameId}`] = status;
-    save(AVAIL_KEY, state.availability);
-    render();
+    db.collection(SEASON_DOC).doc("availability")
+      .set({ [`${playerId}-${gameId}`]: status }, { merge: true });
 }
 
 function setSnack(gameId, name) {
-    state.snacks[gameId] = name;
-    save(SNACKS_KEY, state.snacks);
-    render();
+    db.collection(SEASON_DOC).doc("snacks")
+      .set({ [gameId]: name }, { merge: true });
 }
 
 function getGameCounts(gameId) {
@@ -377,6 +393,11 @@ function buildRoster() {
 
 // ── Render ─────────────────────────────────────────────────────────────────
 function render() {
+    if (!state.loaded) {
+        document.getElementById("root").innerHTML =
+            `<div style="text-align:center;padding:60px 16px;color:var(--t2);font-size:14px;">Loading...</div>`;
+        return;
+    }
     document.getElementById("root").innerHTML =
         buildHeader() + buildTabs() +
         (state.view === "schedule" ? buildSchedule() : buildRoster());
@@ -427,6 +448,7 @@ document.addEventListener("change", e => {
     }
 });
 
+// Initial render shows loading state until Firebase responds
 render();
 </script>
 </body>
