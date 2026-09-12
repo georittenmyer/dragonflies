@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
-const TEAM_NAME = "Dragonflies";
-const SEASON = "Fall 2025";
+const TEAM_NAME = "Sky Blue Dragonflies";
+const SEASON = "Fall 2026";
 
 const GAMES = [
   { id: 1, date: "Sep 7", day: "Sun", time: "1:45 PM", location: "Jefferson" },
@@ -16,31 +16,30 @@ const GAMES = [
 ];
 
 const INITIAL_PLAYERS = [
-  { id: 1, name: "Geo", role: "coach" },
-  { id: 2, name: "Greg", role: "coach" },
-  { id: 15, name: "Cedar B", role: "player" },
-  { id: 12, name: "Nathaniel D", role: "player" },
-  { id: 13, name: "Zachary D", role: "player" },
-  { id: 16, name: "Niko P", role: "player" },
-  { id: 5, name: "Luke G", role: "player" },
-  { id: 8, name: "Emmett H", role: "player" },
+  { id: 1, name: "Geo Rittenmyer", role: "coach" },
+  { id: 2, name: "Gregory Jones", role: "coach" },
+  { id: 3, name: "Zachary D", role: "player" },
+  { id: 4, name: "Nathaniel D", role: "player" },
+  { id: 5, name: "Theo M", role: "player" },
+  { id: 6, name: "Cedar B", role: "player" },
   { id: 7, name: "Emmett J", role: "player" },
-  { id: 14, name: "Paxton M", role: "player" },
-  { id: 4, name: "Oscar P", role: "player" },
-  { id: 10, name: "Ryatt R", role: "player" },
-  { id: 17, name: "Jonah T", role: "player" },
-  { id: 9, name: "Aari V", role: "player" },
+  { id: 8, name: "Ryatt R", role: "player" },
+  { id: 9, name: "Emmett H", role: "player" },
+  { id: 10, name: "Oscar P", role: "player" },
+  { id: 11, name: "Niko P", role: "player" },
+  { id: 12, name: "Aari V", role: "player" },
+  { id: 13, name: "Luke G", role: "player" },
+  { id: 14, name: "Jonah T", role: "player" },
+  { id: 15, name: "Ash P", role: "player" },
+  { id: 16, name: "Conall O", role: "player" },
+  { id: 17, name: "Perrin H", role: "player" },
 ];
 
-const INITIAL_AVAILABILITY = {
-  "1-1": "available", "1-2": "available", "1-3": "available", "1-4": "available", "1-5": "available", "1-6": "available",
-  "2-1": "available", "2-2": "available", "2-3": "available", "2-4": "available", "2-5": "available", "2-6": "available", "2-7": "available", "2-8": "available", "2-9": "available",
-  "7-1": "available", "7-2": "available", "7-3": "available", "7-4": "available", "7-5": "available", "7-6": "available", "7-7": "available", "7-8": "available", "7-9": "available",
-  "8-2": "available", "8-3": "available", "8-4": "available", "8-5": "available", "8-6": "available", "8-7": "available", "8-8": "available", "8-9": "available",
-  "9-1": "available", "9-2": "available", "9-3": "available", "9-4": "available", "9-5": "available", "9-6": "available", "9-7": "available", "9-8": "available", "9-9": "available",
-  "12-1": "available", "12-2": "available", "12-3": "available", "12-4": "available", "12-5": "available", "12-6": "available", "12-7": "available", "12-8": "available", "12-9": "available",
-  "15-1": "available", "15-2": "unavailable", "15-3": "available", "15-4": "available", "15-5": "available", "15-6": "available", "15-7": "available", "15-8": "available", "15-9": "available",
-};
+const INITIAL_AVAILABILITY = Object.fromEntries(
+  [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].flatMap(playerId =>
+    [1, 2, 3, 4, 5, 6, 7, 8, 9].map(gameId => [`${playerId}-${gameId}`, "undecided"])
+  )
+);
 
 const STORAGE_KEY = "dragonflies-availability-v1";
 const SNACKS_KEY = "dragonflies-snacks-v1";

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dragonflies — Spring 2026</title>
+    <title>Sky Blue Dragonflies — Fall 2026</title>
     <link rel="icon" href="src/DragonflyLogo_V1.png" />
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; }
@@ -113,10 +113,10 @@
 
         /* Roster grid */
         .roster-wrap { overflow-x: auto; border-radius: var(--r-lg); border: 0.5px solid var(--b3); }
-        .roster-grid { min-width: 600px; }
-        .roster-header { display: grid; grid-template-columns: 140px repeat(8, 1fr); background: var(--bg2); padding: 8px 0; font-size: 11px; font-weight: 500; color: var(--t2); text-align: center; }
+        .roster-grid { min-width: 700px; }
+        .roster-header { display: grid; grid-template-columns: 140px repeat(9, 1fr); background: var(--bg2); padding: 8px 0; font-size: 11px; font-weight: 500; color: var(--t2); text-align: center; }
         .roster-header span:first-child { text-align: left; padding-left: 12px; }
-        .roster-row { display: grid; grid-template-columns: 140px repeat(8, 1fr); background: var(--bg1); padding: 6px 0; align-items: center; font-size: 12px; border-top: 0.5px solid var(--b3); }
+        .roster-row { display: grid; grid-template-columns: 140px repeat(9, 1fr); background: var(--bg1); padding: 6px 0; align-items: center; font-size: 12px; border-top: 0.5px solid var(--b3); }
         .roster-name { padding-left: 12px; font-weight: 500; display: flex; align-items: center; gap: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .roster-c { font-size: 9px; background: #dbeafe; color: #1e40af; padding: 1px 4px; border-radius: 999px; flex-shrink: 0; }
         .roster-cell { display: flex; justify-content: center; }
@@ -133,35 +133,39 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
 <script>
-const TEAM_NAME = "Dragonflies";
-const SEASON = "Spring 2026";
+const TEAM_NAME = "Sky Blue Dragonflies";
+const SEASON = "Fall 2026";
 
 const GAMES = [
-    { id: 1, date: "Mar 29", day: "Sun", time: "3:00 PM", location: "Ridgecrest School - W", home: false, opponent: "SL Fireballs" },
-    { id: 2, date: "Apr 12", day: "Sun", time: "2:00 PM", location: "Van Asselt - N - Spring", home: false, opponent: "RVSC Seattle Stormtroopers" },
-    { id: 3, date: "Apr 19", day: "Sun", time: "1:00 PM", location: "Ridgecrest School - W",  home: false, opponent: "HW Soccer Tigers" },
-    { id: 4, date: "Apr 26", day: "Sun", time: "3:00 PM", location: "Ridgecrest School - W",  home: true,  opponent: "WD Shark Waves" },
-    { id: 5, date: "May 3",  day: "Sun", time: "3:00 PM", location: "Ridgecrest School - W",  home: true,  opponent: "WD Dragons" },
-    { id: 6, date: "May 10", day: "Sun", time: "1:00 PM", location: "Ridgecrest School - E",  home: true,  opponent: "Mag Red Dragons" },
-    { id: 7, date: "May 17", day: "Sun", time: "3:00 PM", location: "Ridgecrest School - E",  home: false, opponent: "HW Mystic Jellybeans" },
-    { id: 8, date: "May 31", day: "Sun", time: "2:00 PM", location: "Ridgecrest School - W",  home: false, opponent: "HW Mystic Jellybeans" },
+    { id: 1, date: "Sep 7", day: "Sun", time: "1:45 PM", location: "Jefferson" },
+    { id: 2, date: "Sep 14", day: "Sun", time: "11:15 AM", location: "Interbay" },
+    { id: 3, date: "Sep 28", day: "Sun", time: "12:15 PM", location: "Green Lake" },
+    { id: 4, date: "Oct 5", day: "Sun", time: "8:45 AM", location: "James Baldwin" },
+    { id: 5, date: "Oct 12", day: "Sun", time: "12:15 PM", location: "Magnolia North" },
+    { id: 6, date: "Oct 19", day: "Sun", time: "10:45 AM", location: "Magnolia North" },
+    { id: 7, date: "Oct 26", day: "Sun", time: "12:45 PM", location: "Interbay" },
+    { id: 8, date: "Nov 2", day: "Sun", time: "10:45 AM", location: "Parkwood" },
+    { id: 9, date: "Nov 9", day: "Sun", time: "8:45 AM", location: "James Baldwin" },
 ];
 
 const PLAYERS = [
-    { id: 1,  name: "Geo",         role: "coach" },
-    { id: 2,  name: "Greg",        role: "coach" },
-    { id: 15, name: "Cedar B",     role: "player" },
-    { id: 12, name: "Nathaniel D", role: "player" },
-    { id: 13, name: "Zachary D",   role: "player" },
-    { id: 16, name: "Niko P",      role: "player" },
-    { id: 5,  name: "Luke G",      role: "player" },
-    { id: 8,  name: "Emmett H",    role: "player" },
-    { id: 7,  name: "Emmett J",    role: "player" },
-    { id: 14, name: "Paxton M",    role: "player" },
-    { id: 4,  name: "Oscar P",     role: "player" },
-    { id: 10, name: "Ryatt R",     role: "player" },
-    { id: 17, name: "Jonah T",     role: "player" },
-    { id: 9,  name: "Aari V",      role: "player" },
+    { id: 1,  name: "Geo Rittenmyer", role: "coach" },
+    { id: 2,  name: "Gregory Jones",  role: "coach" },
+    { id: 3,  name: "Zachary D",      role: "player" },
+    { id: 4,  name: "Nathaniel D",    role: "player" },
+    { id: 5,  name: "Theo M",         role: "player" },
+    { id: 6,  name: "Cedar B",        role: "player" },
+    { id: 7,  name: "Emmett J",       role: "player" },
+    { id: 8,  name: "Ryatt R",        role: "player" },
+    { id: 9,  name: "Emmett H",       role: "player" },
+    { id: 10, name: "Oscar P",        role: "player" },
+    { id: 11, name: "Niko P",         role: "player" },
+    { id: 12, name: "Aari V",         role: "player" },
+    { id: 13, name: "Luke G",         role: "player" },
+    { id: 14, name: "Jonah T",        role: "player" },
+    { id: 15, name: "Ash P",          role: "player" },
+    { id: 16, name: "Conall O",       role: "player" },
+    { id: 17, name: "Perrin H",       role: "player" },
 ];
 
 // ── Firebase config — REPLACE WITH YOUR CONFIG ─────────────────────────────
@@ -177,7 +181,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-const SEASON_DOC = "spring2026";
+const SEASON_DOC = "fall2026";
 
 // ── State ──────────────────────────────────────────────────────────────────
 const state = {
