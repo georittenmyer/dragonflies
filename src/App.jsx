@@ -4,15 +4,11 @@ const TEAM_NAME = "Dragonflies";
 const SEASON = "Fall 2026";
 
 const GAMES = [
-  { id: 1, date: "Sep 7", day: "Sun", time: "1:45 PM", location: "Jefferson" },
-  { id: 2, date: "Sep 14", day: "Sun", time: "11:15 AM", location: "Interbay" },
-  { id: 3, date: "Sep 28", day: "Sun", time: "12:15 PM", location: "Green Lake" },
-  { id: 4, date: "Oct 5", day: "Sun", time: "8:45 AM", location: "James Baldwin" },
-  { id: 5, date: "Oct 12", day: "Sun", time: "12:15 PM", location: "Magnolia North" },
-  { id: 6, date: "Oct 19", day: "Sun", time: "10:45 AM", location: "Magnolia North" },
-  { id: 7, date: "Oct 26", day: "Sun", time: "12:45 PM", location: "Interbay" },
-  { id: 8, date: "Nov 2", day: "Sun", time: "10:45 AM", location: "Parkwood" },
-  { id: 9, date: "Nov 9", day: "Sun", time: "8:45 AM", location: "James Baldwin" },
+  { id: 1, date: "Sep 12", day: "SAT", time: "10:30 AM", location: "Green Lake - 5" },
+  { id: 2, date: "Sep 19", day: "SAT", time: "4:30 PM", location: "Magnolia North - #6" },
+  { id: 3, date: "Sep 26", day: "SAT", time: "3:00 PM", location: "Green Lake - 6" },
+  { id: 4, date: "Oct 3", day: "SAT", time: "9:00 AM", location: "Jefferson - Playfield N" },
+  { id: 5, date: "Oct 10", day: "SAT", time: "10:30 AM", location: "Green Lake - 5" },
 ];
 
 const INITIAL_PLAYERS = [
@@ -37,7 +33,7 @@ const INITIAL_PLAYERS = [
 
 const INITIAL_AVAILABILITY = Object.fromEntries(
   [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].flatMap(playerId =>
-    [1, 2, 3, 4, 5, 6, 7, 8, 9].map(gameId => [`${playerId}-${gameId}`, "undecided"])
+    [1, 2, 3, 4, 5].map(gameId => [`${playerId}-${gameId}`, "undecided"])
   )
 );
 

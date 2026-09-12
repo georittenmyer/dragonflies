@@ -113,10 +113,10 @@
 
         /* Roster grid */
         .roster-wrap { overflow-x: auto; border-radius: var(--r-lg); border: 0.5px solid var(--b3); }
-        .roster-grid { min-width: 700px; }
-        .roster-header { display: grid; grid-template-columns: 140px repeat(9, 1fr); background: var(--bg2); padding: 8px 0; font-size: 11px; font-weight: 500; color: var(--t2); text-align: center; }
+        .roster-grid { min-width: 500px; }
+        .roster-header { display: grid; grid-template-columns: 140px repeat(5, 1fr); background: var(--bg2); padding: 8px 0; font-size: 11px; font-weight: 500; color: var(--t2); text-align: center; }
         .roster-header span:first-child { text-align: left; padding-left: 12px; }
-        .roster-row { display: grid; grid-template-columns: 140px repeat(9, 1fr); background: var(--bg1); padding: 6px 0; align-items: center; font-size: 12px; border-top: 0.5px solid var(--b3); }
+        .roster-row { display: grid; grid-template-columns: 140px repeat(5, 1fr); background: var(--bg1); padding: 6px 0; align-items: center; font-size: 12px; border-top: 0.5px solid var(--b3); }
         .roster-name { padding-left: 12px; font-weight: 500; display: flex; align-items: center; gap: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .roster-c { font-size: 9px; background: #dbeafe; color: #1e40af; padding: 1px 4px; border-radius: 999px; flex-shrink: 0; }
         .roster-cell { display: flex; justify-content: center; }
@@ -137,15 +137,11 @@ const TEAM_NAME = "Dragonflies";
 const SEASON = "Fall 2026";
 
 const GAMES = [
-    { id: 1, date: "Sep 7", day: "Sun", time: "1:45 PM", location: "Jefferson" },
-    { id: 2, date: "Sep 14", day: "Sun", time: "11:15 AM", location: "Interbay" },
-    { id: 3, date: "Sep 28", day: "Sun", time: "12:15 PM", location: "Green Lake" },
-    { id: 4, date: "Oct 5", day: "Sun", time: "8:45 AM", location: "James Baldwin" },
-    { id: 5, date: "Oct 12", day: "Sun", time: "12:15 PM", location: "Magnolia North" },
-    { id: 6, date: "Oct 19", day: "Sun", time: "10:45 AM", location: "Magnolia North" },
-    { id: 7, date: "Oct 26", day: "Sun", time: "12:45 PM", location: "Interbay" },
-    { id: 8, date: "Nov 2", day: "Sun", time: "10:45 AM", location: "Parkwood" },
-    { id: 9, date: "Nov 9", day: "Sun", time: "8:45 AM", location: "James Baldwin" },
+    { id: 1, date: "Sep 12", day: "SAT", time: "10:30 AM", location: "Green Lake - 5", home: false, opponent: "WD Shark Waves" },
+    { id: 2, date: "Sep 19", day: "SAT", time: "4:30 PM", location: "Magnolia North - #6", home: true, opponent: "HW Thunder Strikers+" },
+    { id: 3, date: "Sep 26", day: "SAT", time: "3:00 PM", location: "Green Lake - 6", home: true, opponent: "SL GOLDEN DRAGONS" },
+    { id: 4, date: "Oct 3", day: "SAT", time: "9:00 AM", location: "Jefferson - Playfield N", home: false, opponent: "BH Mighty Mustangs" },
+    { id: 5, date: "Oct 10", day: "SAT", time: "10:30 AM", location: "Green Lake - 5", home: false, opponent: "WD Black Cats" },
 ];
 
 const PLAYERS = [
