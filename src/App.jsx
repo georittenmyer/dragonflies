@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 
-const TEAM_NAME = "Sky Blue Dragonflies";
+const TEAM_NAME = "Dragonflies";
 const SEASON = "Fall 2026";
 
 const GAMES = [
