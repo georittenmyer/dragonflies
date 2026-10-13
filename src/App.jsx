@@ -9,6 +9,11 @@ const GAMES = [
   { id: 3, date: "Sep 26", day: "SAT", time: "3:00 PM", location: "Green Lake - 6" },
   { id: 4, date: "Oct 3", day: "SAT", time: "9:00 AM", location: "Jefferson - Playfield N" },
   { id: 5, date: "Oct 10", day: "SAT", time: "10:30 AM", location: "Green Lake - 5" },
+  { id: 6, date: "Oct 17", day: "SAT", time: "12:00 PM", location: "Green Lake - 5" },
+  { id: 7, date: "Oct 24", day: "SAT", time: "9:00 AM", location: "Green Lake - 6" },
+  { id: 8, date: "Oct 31", day: "SAT", time: "9:00 AM", location: "Green Lake - 5" },
+  { id: 9, date: "Nov 7", day: "SAT", time: "3:00 PM", location: "Green Lake - 6" },
+  { id: 10, date: "Nov 14", day: "SAT", time: "9:00 AM", location: "Northacres - Park" },
 ];
 
 const INITIAL_PLAYERS = [
@@ -33,7 +38,7 @@ const INITIAL_PLAYERS = [
 
 const INITIAL_AVAILABILITY = Object.fromEntries(
   [3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17].flatMap(playerId =>
-    [1, 2, 3, 4, 5].map(gameId => [`${playerId}-${gameId}`, "undecided"])
+    [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(gameId => [`${playerId}-${gameId}`, "undecided"])
   )
 );
 
