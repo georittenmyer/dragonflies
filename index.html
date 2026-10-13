@@ -113,10 +113,10 @@
 
         /* Roster grid */
         .roster-wrap { overflow-x: auto; border-radius: var(--r-lg); border: 0.5px solid var(--b3); }
-        .roster-grid { min-width: 500px; }
-        .roster-header { display: grid; grid-template-columns: 140px repeat(5, 1fr); background: var(--bg2); padding: 8px 0; font-size: 11px; font-weight: 500; color: var(--t2); text-align: center; }
+        .roster-grid { min-width: calc(140px + var(--games) * 72px); }
+        .roster-header { display: grid; grid-template-columns: 140px repeat(var(--games), minmax(72px, 1fr)); background: var(--bg2); padding: 8px 0; font-size: 11px; font-weight: 500; color: var(--t2); text-align: center; }
         .roster-header span:first-child { text-align: left; padding-left: 12px; }
-        .roster-row { display: grid; grid-template-columns: 140px repeat(5, 1fr); background: var(--bg1); padding: 6px 0; align-items: center; font-size: 12px; border-top: 0.5px solid var(--b3); }
+        .roster-row { display: grid; grid-template-columns: 140px repeat(var(--games), minmax(72px, 1fr)); background: var(--bg1); padding: 6px 0; align-items: center; font-size: 12px; border-top: 0.5px solid var(--b3); }
         .roster-name { padding-left: 12px; font-weight: 500; display: flex; align-items: center; gap: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .roster-c { font-size: 9px; background: #dbeafe; color: #1e40af; padding: 1px 4px; border-radius: 999px; flex-shrink: 0; }
         .roster-cell { display: flex; justify-content: center; }
@@ -387,7 +387,7 @@ function buildRoster() {
 
     return `
     <div class="roster-wrap">
-        <div class="roster-grid">
+        <div class="roster-grid" style="--games: ${GAMES.length}">
             <div class="roster-header">
                 <span>Player</span>${headers}
             </div>
